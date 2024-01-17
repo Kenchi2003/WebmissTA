@@ -4,7 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
     <link rel="stylesheet" href="./style.css">
+    <style>
+        .block {
+          border: 1px solid #ccc;
+          padding: 10px;
+          margin: 10px;
+          cursor: pointer;
+        }
+    
+        img {
+          max-width: 200px;
+          height: auto;
+        }
+      </style>
 </head>
 <body>
     <nav>
@@ -15,10 +29,8 @@
                 </div>
                 <ul class="menu">
                     <li><a href="#">หน้าเเรก</a></li>
-                    <li><a href="#">หมวดหมู่</a></li>
-                    <li><a href="#">เกี่ยวกับเรา</a></li>
-                    <li><a href="#">เข้าสู่ระบบ</a></li>
-                    <li><a href="#">รถเข็น</a></li>
+                    <!-- <li><a href="#">หมวดหมู่</a></li>
+                    <li><a href="#">เกี่ยวกับเรา</a></li> -->
                 </ul>
             </div>
         </div>
@@ -28,17 +40,61 @@
         <div class="container">
             <div class="hero-con">
                 <div class="hero-info">
-                    <h3>This is hero</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus veniam ea, quos expedita distinctio deserunt blanditiis amet neque rerum error veritatis totam maiores nam optio quisquam. Vitae a quis ex excepturi iusto consequatur odit, laudantium nihil enim eveniet totam perspiciatis maiores voluptatum quisquam exercitationem quo assumenda consequuntur molestias obcaecati. Dolor.</p>
-                    <a href="#" class="hero-btn">Learn more</a>
+                    <h3>รู้หรือไม่?</h3>
+                    <p>ในยุคที่ทุกอย่างเปลี่ยนแปลงอย่างฉับไว เพียงเสี้ยววินาที หลาย ๆ อย่างในชีวิตคุณก็ไม่เหมือนเดิมอีกต่อไป ด้วยเทคโนโลยีและอินเทอร์เน็ตที่ยึดโยงคนจากทุกมุมโลกให้ใกล้ชิดกันโดยง่าย ผ่านตัวกลางที่เรียกว่าการสื่อสาร ซึ่งทุกวันนี้ไม่ใช่แค่การสื่อสารในรูปแบบของภาษาที่เราใช้พูดจากันเท่านั้น จะเห็นได้ว่า ภาษาโปรแกรมมิ่งเองก็เริ่มเข้ามีบทบาทและแทรกซึมเข้ามาอย่างเห็นได้ชัดภาษาโปรแกรมมิ่ง
+                        
+                        โปรแกรมเมอร์จึงกลายเป็นหนึ่งในสายงานมาแรงแห่งยุค ที่ทำรายได้ค่อนข้างสูงเพราะความต้องการในตลาดแรงงานมาก บวกกับความเป็นวิชาชีพที่ค่อนข้างเฉพาะ (จากการสำรวจพบว่างานเขียนโปรแกรมจะเป็นที่ต้องการในตลาดงานมากขึ้น 21% ภายในปี 2571)
+                        
+                        <br><br><h2>10 อันดับภาษาโปรแกรมมิ่งปี 2022</h2>
+                        แล้วภาษาโปรแกรมมิ่งคืออะไร? ต่างจากภาษาทั่วไปอย่างไร เอาง่าย ๆ คือ ภาษาที่มนุษย์สร้างขึ้นมาเพื่อใช้สื่อสารกับคอมพิวเตอร์ให้ทำงานตามที่ต้องการ ซึ่งแต่ละภาษาต่างใช้ไวยากรณ์และการเข้ารหัสเฉพาะที่ต่างกัน ทว่ามีจุดมุ่งหมายเดียวกัน คือสื่อสารกับคอมพิวเตอร์ให้สร้างโปรแกรมเพื่อทำงานตามวัตถุประสงค์
+                    
+                        ว่ากันว่าบนโลกนี้มีภาษาโปรแกรมมิ่งมากถึง 700 ภาษา แต่วันนี้ 35Deegree ขอหยิบยกเอา 10 ภาษาโปรแกรมมิ่งที่ได้รับความนิยมในปี 2022 มาฝากกันไว้เป็นปฐมบท เผื่อใครที่เริ่มสนใจสายงานและอยากเอาดีทางนี้</p>
                 </div>
 
                 <div class="hero-img">
-                    <img src="#" alt="">
+                    <img src="22569.jpg" alt="Hero Image">
                 </div>
             </div>
+            <div id="data-container"></div>
+    
+    <script>
+        function fetchData() {
+          fetch('https://65706ff809586eff6641613c.mockapi.io/data') // เปลี่ยน URL API ตรงนี้
+            .then(response => response.json())
+            .then(data => {
+              displayDataBlocks(data);
+            })
+            .catch(error => {
+              console.error('Error fetching data:', error);
+            });
+        }
+    
+        function displayDataBlocks(data) {
+          var container = document.getElementById('data-container');
+    
+          data.forEach(item => {
+            var block = document.createElement('div');
+            block.classList.add('block');
+            block.setAttribute('onclick', `openNewPage('${item.id}')`);
+    
+            block.innerHTML = `
+              <img src="${item.imageUrl}" alt="${item.name}">
+              <h2>${item.name}</h2>
+              <p>${item.body}</p>
+            `;
+    
+            container.appendChild(block);
+          });
+        }
+    
+        function openNewPage(id) {
+          window.location.href = `detail.html?id=${id}`;
+        }
+
+        // เรียกใช้ fetchData เมื่อหน้าเว็บโหลดเสร็จ
+        fetchData();
+    </script>
         </div>
     </section>
 </body>
 </html>
-

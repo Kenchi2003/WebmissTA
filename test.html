@@ -1,0 +1,58 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .block {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin: 10px;
+      cursor: pointer;
+    }
+
+    img {
+      max-width: 200px;
+      height: auto;
+    }
+  </style>
+  <script>
+    function fetchData() {
+      fetch('https://65706ff809586eff6641613c.mockapi.io/data') // เปลี่ยน URL API ตรงนี้
+        .then(response => response.json())
+        .then(data => {
+          displayDataBlocks(data);
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
+    }
+
+    function displayDataBlocks(data) {
+      var container = document.getElementById('data-container');
+
+      data.forEach(item => {
+        var block = document.createElement('div');
+        block.classList.add('block');
+        block.setAttribute('onclick', `openNewPage('${item.id}')`);
+
+        block.innerHTML = `
+          <img src="${item.imageUrl}" alt="${item.name}">
+          <h2>${item.name}</h2>
+          <p>${item.body}</p>
+        `;
+
+        container.appendChild(block);
+      });
+    }
+
+    function openNewPage(id) {
+      window.location.href = `detail.html?id=${id}`;
+    }
+  </script>
+</head>
+<body onload="fetchData()">
+  <div id="data-container"></div>
+</body>
+</html>
